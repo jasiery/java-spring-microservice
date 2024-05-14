@@ -7,18 +7,18 @@ package com.ybanez.microservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.http.HttpStatus;
 
 /**
  *
  * @author jaeshi
  */
-@Getter
-@Setter
+@Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CustomerResult {
+    
+    private Customer customer;
     
     private String customerNumber;
     
@@ -37,6 +37,21 @@ public class CustomerResult {
     public CustomerResult markAsFailed(String field, String message){
         this.transactionStatusCode = HttpStatus.BAD_REQUEST.value();
         this.transactionStatusDescription = message;
+        return this;
+    }
+    
+    @JsonIgnore
+    public CustomerResult markAsNotFound(){
+        this.transactionStatusCode = HttpStatus.NOT_FOUND.value();
+        this.transactionStatusDescription = "Customer not found";
+        return this;
+    }
+    
+    
+    @JsonIgnore
+    public CustomerResult markAsFound(){
+        this.transactionStatusCode = HttpStatus.FOUND.value();
+        this.transactionStatusDescription = "Customer Accound found";
         return this;
     }
 }

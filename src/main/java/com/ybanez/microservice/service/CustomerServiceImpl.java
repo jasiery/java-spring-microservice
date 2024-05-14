@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  * @author jaeshi
  */
 @Service
-public class CustomerServiceImpl extends CustomerServiceHelper implements CustomerService {
+public class CustomerServiceImpl implements CustomerService {
     
     @Autowired
     private CustomerRepository customerRepository;
@@ -29,5 +29,11 @@ public class CustomerServiceImpl extends CustomerServiceHelper implements Custom
        data.getAddress2(), data.getType());
        customer = customerRepository.save(customer);
        return customer;
+    }
+
+    @Override
+    public Customer getCustomer(String id) throws Exception {
+        Customer customer = customerRepository.findById(Integer.valueOf(id)).orElse(null);
+        return customer;
     }
 }

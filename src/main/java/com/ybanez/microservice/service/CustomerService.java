@@ -17,4 +17,6 @@ import org.springframework.stereotype.Service;
 public interface CustomerService {
     
     Customer addCustomer(CustomerData data) throws Exception;
+    
+    Customer getCustomer(String id) throws Exception;
 }

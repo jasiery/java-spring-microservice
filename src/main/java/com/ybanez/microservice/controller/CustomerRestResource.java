@@ -14,6 +14,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,7 +44,19 @@ public class CustomerRestResource extends AbstractRestResource{
         }
         Customer newCustomer = customerService.addCustomer(data);
         customerResult.markAsSuccess(String.valueOf(newCustomer.getId()));
-        return addedSuccessfully(String.valueOf(newCustomer.getId()), result);
+        return addedSuccessfully(String.valueOf(newCustomer.getId()), customerResult);
     }
     
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getAccount(@PathVariable String id) throws Exception {
+        CustomerResult result = new CustomerResult();
+        Customer customer = customerService.getCustomer(id);
+        if(customer == null) {
+            return notFound(result.markAsNotFound());
+        }else {
+            result.setCustomer(customer);
+            result.markAsFound();
+            return hasFound(result);
+        }
+    }
 }

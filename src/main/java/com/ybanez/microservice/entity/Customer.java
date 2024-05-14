@@ -5,6 +5,7 @@
  */
 package com.ybanez.microservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 
@@ -22,6 +24,7 @@ import lombok.Data;
 @Entity
 @Table(name = "spm_customer")
 @Data
+@NoArgsConstructor
 public class Customer {
     
     @Id
@@ -51,6 +54,7 @@ public class Customer {
         S,Y
     }
     
+    @JsonIgnore
     public Customer(String name, String mobile,
             String email, String address1, String address2,
             CustomerType type) {
