@@ -22,16 +22,15 @@ public class AbstractRestResource {
 
     //validation
     public Map<String, String> validate(BindingResult result) {
-        Map<String, String> identifiedError = new HashMap<>();
+        Map<String, String> identifiedErrors = new HashMap<>();
+
         if (result.hasErrors()) {
             for (FieldError error : result.getFieldErrors()) {
-                String field = error.getField();
-                String errorMessage = error.getDefaultMessage();
-                identifiedError.put(field, errorMessage);
-                return identifiedError;
+                identifiedErrors.put(error.getField(), error.getDefaultMessage());
             }
         }
-        return null;
+
+        return identifiedErrors.isEmpty() ? null : identifiedErrors;
     }
 
     public ResponseEntity<?> addedSuccessfully(String id, Object data) {

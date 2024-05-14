@@ -6,6 +6,8 @@
 package com.ybanez.microservice.entity;
 
 import com.ybanez.microservice.entity.Customer.CustomerType;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -16,19 +18,20 @@ import lombok.Data;
 @Data
 public class CustomerData {
     
-    @NotNull(message = "Name is required field")
+    @NotBlank(message = "Name is required field")
     private String name;
     
-    @NotNull(message = "Mobile is required field")
+    @NotBlank(message = "Mobile is required field")
     private String mobile;
       
-    @NotNull(message = "Email is required field")
+    @NotBlank(message = "Email is required field")
+    @Email(message = "Invalid email format")
     private String email;
     
-    @NotNull(message = "Address 1 is required field")
+    @NotBlank(message = "Address 1 is required field")
     private String address1;
     
-    @NotNull(message = "Address 2 is required field")
+    @NotBlank(message = "Address 2 is required field")
     private String address2;
 
     @NotNull(message = "Type is required field")

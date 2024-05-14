@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,7 +33,7 @@ public class CustomerRestResource extends AbstractRestResource{
     private CustomerService customerService;
     
     @PostMapping
-    public ResponseEntity<?> addCustomer(@Valid CustomerData data, 
+    public ResponseEntity<?> addCustomer(@Valid @RequestBody CustomerData data, 
             BindingResult result) throws Exception {
         CustomerResult customerResult = new CustomerResult();
         Map<String, String> identifiedError = validate(result);
