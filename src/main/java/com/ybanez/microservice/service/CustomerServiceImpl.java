@@ -25,7 +25,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer addCustomer(CustomerData data) throws Exception {
        //validate inputs
-       Customer customer = new Customer(data.getName(), data.getMobile(), data.getEmail(), data.getAddress1(),
+       Customer customer = new Customer(data.getCustomerName(), data.getCustomerMobile(), data.getCustomerEmail(), data.getAddress1(),
        data.getAddress2(), data.getType());
        customer = customerRepository.save(customer);
        return customer;

@@ -19,14 +19,14 @@ import lombok.Data;
 public class CustomerData {
     
     @NotBlank(message = "Name is required field")
-    private String name;
+    private String customerName;
     
     @NotBlank(message = "Mobile is required field")
-    private String mobile;
+    private String customerMobile;
       
     @NotBlank(message = "Email is required field")
     @Email(message = "Invalid email format")
-    private String email;
+    private String customerEmail;
     
     @NotBlank(message = "Address 1 is required field")
     private String address1;

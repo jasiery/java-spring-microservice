@@ -43,7 +43,7 @@ public class AbstractRestResource {
     }
 
     public ResponseEntity<?> notFound(Object data) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(data);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(data);
     }
 
     public ResponseEntity<?> hasFound(Object data) {

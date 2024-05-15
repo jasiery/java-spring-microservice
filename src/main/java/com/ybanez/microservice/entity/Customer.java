@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -27,9 +28,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Customer {
     
+    @Transient
+    private String customerNumber;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cmr_id")
+    @JsonIgnore
     private int id;
     
     @Column(name = "cmr_name")
@@ -52,6 +57,11 @@ public class Customer {
     
     public enum CustomerType {
         S,Y
+    }
+    
+    @JsonIgnore
+    public String getCustomerNumber() {
+        return String.valueOf(this.id);
     }
     
     @JsonIgnore
